@@ -16,10 +16,6 @@ userRouter.get("/",(req,res)=>{
 userRouter.post("/register",async(req,res)=>{
     const {name,email,gender,password,confirmPassword,city} = req.body;
      try {
-        const existingUser = await userModel.findOne({email})
-        if(existingUser){
-            return res.status(400).send({ "msg": "User with this email already exists"})
-         }
          if (password.length < 5) {
             return res.status(400).send({ "msg": "Password should be at least 5 characters long" });
         }

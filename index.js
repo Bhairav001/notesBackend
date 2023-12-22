@@ -4,7 +4,6 @@ const cors = require("cors");
 const { connection } = require("./config/db");
 const { crudRoutes } = require("./routes/crud.route");
 const { userRouter } = require("./routes/user.route");
-// const { authenticate } = require("./middlewares/authenticate.middleware");
 const { postRouter } = require("./routes/Post.route");
 
 require("dotenv").config()
@@ -18,12 +17,10 @@ app.use(cors());
 const PORT = process.env.PORT || 8080;
 
 app.get("/",(req,res)=>{
-    // res.send("This is Crud Application")
-    res.json({msg:"Server is running on port 8080"})
+    res.send("This is Notes App")
 })
 app.use("/users",userRouter)
 app.use("/crud",crudRoutes)
-// app.use(authenticate)
 app.use("/posts",postRouter)
 app.listen(PORT,async()=>{
     try {

@@ -2,10 +2,6 @@ const express = require("express");
 
 const { crudModel } = require("../model/crud.model");
 
-// const path = require('path');
-
-// const multer = require("multer");
-
 
 
 const crudRoutes = express.Router();
@@ -61,24 +57,7 @@ crudRoutes.delete("/delete/:id",async(req,res)=>{
 })
 
 
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         const uploadPath = path.join(__dirname,"public", "images");
-//         console.log("uploadPath",uploadPath)
-//         cb(null, uploadPath);
-//     },
-//     filename: function (req, file, cb) {
-//         cb(null, `${Date.now()}_${file.originalname}`);
-//     }
-// });
 
-// const upload = multer({storage:storage})
-// console.log("upload",upload)
-// crudRoutes.post("/upload",upload.single("file"),(req,res)=>{
-//     console.log(req.body);
-//     console.log(req.file);
-//     res.send("uploaded file successfully!");
-// })
 
 module.exports={
     crudRoutes

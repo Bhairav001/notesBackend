@@ -9,14 +9,8 @@ const { userModel } = require("../model/user.model");
 
 const userRouter = express.Router();
 
-userRouter.get("/",async(req,res)=>{
-    const payload = req.body
-    try {
-        const allUsers = await userModel.find(payload)
-        res.send(allUsers) 
-    } catch (error) {
-        console.log(error)
-    }
+userRouter.get("/",(req,res)=>{
+    res.send("this is register page")
 })
 
 userRouter.post("/register",async(req,res)=>{

@@ -4,8 +4,8 @@ const cors = require("cors");
 const { connection } = require("./config/db");
 const { crudRoutes } = require("./routes/crud.route");
 const { userRouter } = require("./routes/user.route");
-const { authenticate } = require("./middlewares/authenticate.middleware");
-const { postRouter } = require("./routes/post.route");
+// const { authenticate } = require("./middlewares/authenticate.middleware");
+const { postRouter } = require("./routes/Post.route");
 
 require("dotenv").config()
 
@@ -22,8 +22,8 @@ app.get("/",(req,res)=>{
     res.json({msg:"Server is running on port 8080"})
 })
 app.use("/users",userRouter)
-// app.use(authenticate)
 app.use("/crud",crudRoutes)
+// app.use(authenticate)
 app.use("/posts",postRouter)
 app.listen(PORT,async()=>{
     try {

@@ -9,16 +9,35 @@ const { userModel } = require("../model/user.model");
 
 const userRouter = express.Router();
 
-
+userRouter.get("/",async(req,res)=>{
+    const payload = req.body
+    try {
+        const allUsers = await userModel.find(payload)
+        res.send(allUsers) 
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 userRouter.post("/register",async(req,res)=>{
-    const {name,email,gender,password,age,city} = req.body;
+    const {name,email,gender,password,confirmPassword,city} = req.body;
      try {
+        const existingUser = await userModel.findOne({email})
+        if(existingUser){
+            return res.status(400).send({ "msg": "User with this email already exists"})
+         }
+         if (password.length < 5) {
+            return res.status(400).send({ "msg": "Password should be at least 5 characters long" });
+        }
+
+        if (password !== confirmPassword) {
+            return res.status(400).send({ "msg": "Password and ConfirmPassword do not match" });
+        }
         bcrypt.hash(password,6,async(err,secure_pass)=>{
             if(err){
                 console.log(err)
             }else{
-                const user = new userModel({name,email,gender,password:secure_pass,age,city})
+                const user = new userModel({name,email,gender,password:secure_pass,confirmPassword,city})
                 await user.save();
                 res.send({msg:"User Registered"})
             }
